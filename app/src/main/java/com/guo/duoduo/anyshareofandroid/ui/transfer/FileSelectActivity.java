@@ -75,15 +75,18 @@ public class FileSelectActivity extends BaseActivity implements OnSelectItemClic
         List<String> titles = new ArrayList<>();
         titles.add(getString(R.string.app));
         titles.add(getString(R.string.picture));
+//        titles.add(getString(R.string.file));
 
         tabLayout = (TabLayout) findViewById(R.id.activity_file_tabLayout);
         tabLayout.addTab(tabLayout.newTab().setText(titles.get(0)));
         tabLayout.addTab(tabLayout.newTab().setText(titles.get(1)));
+//        tabLayout.addTab(tabLayout.newTab().setText(titles.get(2)));
 
         viewPager = (ViewPager) findViewById(R.id.activity_file_viewpager);
         List<android.support.v4.app.Fragment> fragments = new ArrayList<>();
         fragments.add(new AppFragment());
         fragments.add(new PictureFragment());
+
 
         FragmentAdapter adapter = new FragmentAdapter(getSupportFragmentManager(),
             fragments, titles);

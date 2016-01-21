@@ -14,24 +14,28 @@ import com.guo.duoduo.anyshareofandroid.R;
 import com.guo.duoduo.anyshareofandroid.ui.uientity.LocationPoint;
 
 
-public class FloatWindowSmallView extends LinearLayout
-{
+public class FloatWindowSmallView extends LinearLayout {
 
     private static final String tag = FloatWindowSmallView.class.getSimpleName();
 
     private static final int DURATION_TIME = 800;
-    /** 用于更新小悬浮窗的位置 */
+    /**
+     * 用于更新小悬浮窗的位置
+     */
     private WindowManager windowManager;
-    /** 被移动的图标 */
+    /**
+     * 被移动的图标
+     */
     private ImageView floatImg;
-    /** 小悬浮窗的参数 */
+    /**
+     * 小悬浮窗的参数
+     */
     private WindowManager.LayoutParams mParams;
     private Context context;
     private float xTo;
     private float yTo;
 
-    public FloatWindowSmallView(Context context, Drawable icon, float xto, float yto)
-    {
+    public FloatWindowSmallView(Context context, Drawable icon, float xto, float yto) {
         super(context);
         this.context = context;
         xTo = xto;
@@ -42,29 +46,24 @@ public class FloatWindowSmallView extends LinearLayout
         floatImg.setImageDrawable(icon);
     }
 
-    /** 用于移动图标 */
-    public void launchImg()
-    {
+    /**
+     * 用于移动图标
+     */
+    public void launchImg() {
         LocationPoint start = new LocationPoint(mParams.x, mParams.y);
         LocationPoint end = new LocationPoint(0, 0);
-        ValueAnimator locationAnimation = ValueAnimator.ofObject(new PointEvaluator(),
-            start, end);
+        ValueAnimator locationAnimation = ValueAnimator.ofObject(new PointEvaluator(), start, end);
 
-        locationAnimation.addUpdateListener(new ValueAnimator.AnimatorUpdateListener()
-        {
+        locationAnimation.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
-            public void onAnimationUpdate(ValueAnimator animation)
-            {
+            public void onAnimationUpdate(ValueAnimator animation) {
                 LocationPoint location = (LocationPoint) animation.getAnimatedValue();
                 mParams.x = location.x;
                 mParams.y = location.y;
 
-                if (location.x == 0 && location.y == 0)
-                {
+                if (location.x == 0 && location.y == 0) {
                     MyWindowManager.removeSmallWindow(context);
-                }
-                else
-                {
+                } else {
                     windowManager.updateViewLayout(FloatWindowSmallView.this, mParams);
                 }
             }
@@ -74,18 +73,17 @@ public class FloatWindowSmallView extends LinearLayout
         locationAnimation.start();
     }
 
-    /** 将小悬浮窗的参数传入，用于更新小悬浮窗的位置 */
-    public void setParams(WindowManager.LayoutParams params)
-    {
+    /**
+     * 将小悬浮窗的参数传入，用于更新小悬浮窗的位置
+     */
+    public void setParams(WindowManager.LayoutParams params) {
         mParams = params;
     }
 
-    public static class PointEvaluator implements TypeEvaluator
-    {
+    public static class PointEvaluator implements TypeEvaluator {
 
         @Override
-        public Object evaluate(float fraction, Object startValue, Object endValue)
-        {
+        public Object evaluate(float fraction, Object startValue, Object endValue) {
             LocationPoint startPoint = (LocationPoint) startValue;
             LocationPoint endPoint = (LocationPoint) endValue;
             float x = startPoint.x + fraction * (endPoint.x - startPoint.x);

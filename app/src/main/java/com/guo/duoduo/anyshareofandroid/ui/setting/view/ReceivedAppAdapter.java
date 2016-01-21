@@ -24,68 +24,56 @@ import com.guo.duoduo.anyshareofandroid.ui.uientity.IInfo;
 /**
  * Created by 郭攀峰 on 2015/10/11.
  */
-public class ReceivedAppAdapter extends RecyclerView.Adapter<ReceivedAppAdapter.MyHolder>
-{
+public class ReceivedAppAdapter extends RecyclerView.Adapter<ReceivedAppAdapter.MyHolder> {
     private Context mContext;
     private ArrayList<IInfo> mAppInfoList;
 
-    public ReceivedAppAdapter(Context context, ArrayList<IInfo> appInfoList)
-    {
+    public ReceivedAppAdapter(Context context, ArrayList<IInfo> appInfoList) {
         mContext = context;
         mAppInfoList = appInfoList;
     }
 
     @Override
-    public MyHolder onCreateViewHolder(ViewGroup parent, int viewType)
-    {
-        MyHolder myHolder = new MyHolder(LayoutInflater.from(mContext).inflate(
-            R.layout.view_received_app_item, null));
+    public MyHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        MyHolder myHolder = new MyHolder(LayoutInflater.from(mContext).inflate(R.layout.view_received_app_item, null));
 
         return myHolder;
     }
 
     @Override
-    public void onBindViewHolder(MyHolder holder, final int position)
-    {
+    public void onBindViewHolder(MyHolder holder, final int position) {
         final AppInfo app = (AppInfo) mAppInfoList.get(position);
 
-        if (app == null)
-            return;
+        if (app == null || holder == null) return;
 
         holder.mIcon.setImageBitmap(((BitmapDrawable) app.getFileIcon()).getBitmap());
         holder.mName.setText(app.getFileName());
         holder.mSize.setText(app.getFileSize());
 
-        holder.mLayout.setOnClickListener(new View.OnClickListener()
-        {
+        holder.mLayout.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v)
-            {
+            public void onClick(View v) {
                 // install app
                 Intent intent = new Intent(Intent.ACTION_VIEW);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                intent.setDataAndType(Uri.fromFile(new File(app.getFilePath())),
-                    "application/vnd.android.package-archive");
+                intent.setDataAndType(Uri.fromFile(new File(app.getFilePath())), "application/vnd.android.package-archive");
                 mContext.startActivity(intent);
             }
         });
     }
 
     @Override
-    public int getItemCount()
-    {
+    public int getItemCount() {
         return mAppInfoList.size();
     }
 
-    static class MyHolder extends RecyclerView.ViewHolder
-    {
+    static class MyHolder extends RecyclerView.ViewHolder {
         ImageView mIcon;
         TextView mName;
         TextView mSize;
         LinearLayout mLayout;
 
-        public MyHolder(View view)
-        {
+        public MyHolder(View view) {
             super(view);
             mIcon = (ImageView) view.findViewById(R.id.received_app_icon);
             mName = (TextView) view.findViewById(R.id.received_app_name);

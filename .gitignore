@@ -5,3 +5,16 @@
 .DS_Store
 /build
 /captures
+/.idea
+/httpServer
+/p2pmanager
+/RadarScanView
+/randomtextview
+/rippleoutlayout
+/rippleview
+/gradlew.bat
+/AnyShareOfAndroid.iml
+/filetransfer.gif
+/gradlew
+/gradle.properties
+/gradle

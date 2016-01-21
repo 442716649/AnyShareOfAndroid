@@ -2,34 +2,45 @@ package com.guo.duoduo.anyshareofandroid.ui.main;
 
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.guo.duoduo.anyshareofandroid.R;
 import com.guo.duoduo.anyshareofandroid.sdk.cache.Cache;
 import com.guo.duoduo.anyshareofandroid.ui.setting.AboutActivity;
 import com.guo.duoduo.anyshareofandroid.ui.setting.FileBrowseActivity;
+import com.guo.duoduo.anyshareofandroid.ui.setting.view.ReceivedAppAdapter;
 import com.guo.duoduo.anyshareofandroid.ui.transfer.FileSelectActivity;
 import com.guo.duoduo.anyshareofandroid.ui.transfer.ReceiveActivity;
+import com.guo.duoduo.anyshareofandroid.ui.uientity.AppInfo;
+import com.guo.duoduo.anyshareofandroid.utils.ApkTools;
+import com.guo.duoduo.anyshareofandroid.utils.DeviceUtils;
 import com.guo.duoduo.anyshareofandroid.utils.PreferenceUtils;
 import com.guo.duoduo.httpserver.ui.Send2PCActivity;
+import com.guo.duoduo.p2pmanager.p2pcore.P2PManager;
+
+import java.io.File;
+import java.util.ArrayList;
 
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener
-{
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     private EditText nameEdit;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState)
-    {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.activity_main_toolbar);
@@ -45,51 +56,42 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         send2PC.setOnClickListener(this);
 
         nameEdit = (EditText) findViewById(R.id.activity_main_name_edit);
-        nameEdit.setText((String) PreferenceUtils.getParam(MainActivity.this, "String",
-            Build.DEVICE));
+        nameEdit.setText((String) PreferenceUtils.getParam(MainActivity.this, "String", Build.DEVICE));
     }
 
     @Override
-    public void onPause()
-    {
+    public void onPause() {
         super.onPause();
         //记住用户修改的名字
-        PreferenceUtils.setParam(MainActivity.this, "String", nameEdit.getText()
-                .toString());
+        PreferenceUtils.setParam(MainActivity.this, "String", nameEdit.getText().toString());
     }
 
     @Override
-    public void onClick(View view)
-    {
-        switch (view.getId())
-        {
-            case R.id.activity_main_i_receive :
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.activity_main_i_receive:
                 Cache.selectedList.clear();
-                startActivity(new Intent(MainActivity.this, ReceiveActivity.class)
-                        .putExtra("name", nameEdit.getText().toString()));
+                startActivity(new Intent(MainActivity.this, ReceiveActivity.class).putExtra("name", nameEdit.getText().toString()));
                 break;
-            case R.id.activity_main_i_send :
+            case R.id.activity_main_i_send:
                 Cache.selectedList.clear();
-                startActivity(new Intent(MainActivity.this, FileSelectActivity.class)
-                        .putExtra("name", nameEdit.getText().toString()));
+                startActivity(new Intent(MainActivity.this, FileSelectActivity.class).putExtra("name", nameEdit.getText().toString()));
                 break;
-            case R.id.main_i_send_2_pc :
+            case R.id.main_i_send_2_pc:
                 startActivity(new Intent(MainActivity.this, Send2PCActivity.class));
                 break;
         }
     }
 
-    private Toolbar.OnMenuItemClickListener onMenuItemClick = new Toolbar.OnMenuItemClickListener()
-    {
+    private Toolbar.OnMenuItemClickListener onMenuItemClick = new Toolbar.OnMenuItemClickListener() {
         @Override
-        public boolean onMenuItemClick(MenuItem menuItem)
-        {
-            switch (menuItem.getItemId())
-            {
-                case R.id.menu_item_receive_directory :
-                    startActivity(new Intent(MainActivity.this, FileBrowseActivity.class));
+        public boolean onMenuItemClick(MenuItem menuItem) {
+            switch (menuItem.getItemId()) {
+                case R.id.menu_item_receive_directory:
+//                    startActivity(new Intent(MainActivity.this, FileBrowseActivity.class));
+                    openFolder();
                     break;
-                case R.id.menu_item_about :
+                case R.id.menu_item_about:
                     startActivity(new Intent(MainActivity.this, AboutActivity.class));
                     break;
             }
@@ -98,11 +100,34 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     };
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu)
-    {
+    public boolean onCreateOptionsMenu(Menu menu) {
         // 為了讓 Toolbar 的 Menu 有作用，這邊的程式不可以拿掉
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
 
+    public void openFolder() {
+
+        if (!TextUtils.isEmpty(P2PManager.getSaveDir())) {
+            File file = new File(P2PManager.getSaveDir());
+            if (file.exists() && file.isDirectory()) {
+                File[] appFileArray = file.listFiles();
+                if (appFileArray != null && appFileArray.length > 0) {
+                    Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+                    intent.addCategory(Intent.CATEGORY_OPENABLE);
+                    intent.setDataAndType(Uri.fromFile(file), "file/");
+                    try {
+                        startActivity(intent);
+                    } catch (Exception e) {
+                        Toast.makeText(this, "接收路径" + P2PManager.getSaveDir(), Toast.LENGTH_SHORT).show();
+                    }
+                } else {
+                    Toast.makeText(this, "没有接收到文件", Toast.LENGTH_SHORT).show();
+                }
+            } else {
+                Toast.makeText(this, "没有接收到文件", Toast.LENGTH_SHORT).show();
+            }
+
+        }
+    }
 }
