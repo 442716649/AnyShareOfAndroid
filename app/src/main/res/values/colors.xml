@@ -27,4 +27,6 @@
     <color name="red">#f64c3a</color>
     <color name="gray_overlay">#66000000</color>
 
+    <color name="file_uns">#d6d7d7</color>
+    <color name="file_s">#58c2f9</color>
 </resources>

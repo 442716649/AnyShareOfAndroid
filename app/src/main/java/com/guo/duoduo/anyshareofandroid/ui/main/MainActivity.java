@@ -1,11 +1,16 @@
 package com.guo.duoduo.anyshareofandroid.ui.main;
 
 
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
@@ -13,8 +18,12 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.guo.duoduo.anyshareofandroid.R;
@@ -29,6 +38,8 @@ import com.guo.duoduo.anyshareofandroid.utils.ApkTools;
 import com.guo.duoduo.anyshareofandroid.utils.DeviceUtils;
 import com.guo.duoduo.anyshareofandroid.utils.PreferenceUtils;
 import com.guo.duoduo.httpserver.ui.Send2PCActivity;
+import com.guo.duoduo.httpserver.utils.Constant;
+import com.guo.duoduo.httpserver.utils.Network;
 import com.guo.duoduo.p2pmanager.p2pcore.P2PManager;
 
 import java.io.File;
@@ -38,6 +49,7 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     private EditText nameEdit;
+    private View rootView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +69,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         nameEdit = (EditText) findViewById(R.id.activity_main_name_edit);
         nameEdit.setText((String) PreferenceUtils.getParam(MainActivity.this, "String", Build.DEVICE));
+
+        rootView = (View) findViewById(R.id.root);
+        rootView.setOnClickListener(this);
     }
 
     @Override
@@ -78,7 +93,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 startActivity(new Intent(MainActivity.this, FileSelectActivity.class).putExtra("name", nameEdit.getText().toString()));
                 break;
             case R.id.main_i_send_2_pc:
-                startActivity(new Intent(MainActivity.this, Send2PCActivity.class));
+//                startActivity(new Intent(MainActivity.this, Send2PCActivity.class));
+                pcDialog();
+                break;
+            case R.id.root:
+                InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
                 break;
         }
     }
@@ -106,28 +126,31 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         return true;
     }
 
-    public void openFolder() {
-
-        if (!TextUtils.isEmpty(P2PManager.getSaveDir())) {
-            File file = new File(P2PManager.getSaveDir());
-            if (file.exists() && file.isDirectory()) {
-                File[] appFileArray = file.listFiles();
-                if (appFileArray != null && appFileArray.length > 0) {
-                    Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
-                    intent.addCategory(Intent.CATEGORY_OPENABLE);
-                    intent.setDataAndType(Uri.fromFile(file), "file/");
-                    try {
-                        startActivity(intent);
-                    } catch (Exception e) {
-                        Toast.makeText(this, "接收路径" + P2PManager.getSaveDir(), Toast.LENGTH_SHORT).show();
-                    }
-                } else {
-                    Toast.makeText(this, "没有接收到文件", Toast.LENGTH_SHORT).show();
+    private void pcDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.DialogPickerTheme);
+        builder.setTitle(getString(R.string.app_name));
+        String ip = Network.getLocalIp(getApplicationContext());
+        if (TextUtils.isEmpty(ip)) {
+            builder.setMessage("network address acquisition failure, will exit the program!");
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    finish();
+                    android.os.Process.killProcess(android.os.Process.myPid());
                 }
-            } else {
-                Toast.makeText(this, "没有接收到文件", Toast.LENGTH_SHORT).show();
-            }
-
+            }, 2 * 1000);
+        } else {
+            builder.setMessage("Input in PC browser IP：http://" + ip + ":" + Constant.Config.PORT + Constant.Config.Web_Root + " " + " hit the Enter key.");
         }
+        builder.setPositiveButton("ok", new DialogInterface.OnClickListener() { //设置确定按钮
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+
+            }
+        });
+
+        builder.create().show();
     }
+
 }

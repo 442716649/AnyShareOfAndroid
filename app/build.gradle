@@ -5,17 +5,64 @@ android {
     buildToolsVersion "23.0.1"
 
     defaultConfig {
-        applicationId "com.guo.duoduo.anyshareofandroid"
+        applicationId "com.fastshare.apps"
         minSdkVersion 15
         targetSdkVersion 23
         versionCode 1
         versionName "1.0"
+        manifestPlaceholders = [
+                UMENG_APPKEY_VALUE: "",
+
+        ]
     }
+
+    //签名
+    signingConfigs {
+        myConfig {
+            storeFile file("key.keystore")
+            storePassword "key123456"
+            keyAlias "com.android.key"
+            keyPassword "key123456"
+        }
+    }
+//混淆
     buildTypes {
         release {
+            zipAlignEnabled true
             minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            buildConfigField "boolean", "ISDEBUG", "false"
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard.flags'
+            signingConfig signingConfigs.myConfig
         }
+        debug {
+            buildConfigField "boolean", "ISDEBUG", "true"
+        }
+    }
+    //多渠道配置
+    productFlavors {
+        apps9 {
+
+            manifestPlaceholders = [
+                    UMENG_CHANNEL_VALUE: "9apps",
+
+            ]
+        }
+    }
+    applicationVariants.all { variant ->
+        variant.outputs.each { output ->
+            def outputFile = output.outputFile
+            if (outputFile != null && outputFile.name.endsWith('.apk')) {
+                def channel = variant.getMergedFlavor().getManifestPlaceholders().get('UMENG_CHANNEL_VALUE');
+                def fileName = variant.getApplicationId() +
+                        "-" + variant.getVersionName() + "-" + channel + '.apk';
+                output.outputFile = new File(outputFile.parent, fileName)
+            }
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_7
+        targetCompatibility JavaVersion.VERSION_1_7
     }
 }
 

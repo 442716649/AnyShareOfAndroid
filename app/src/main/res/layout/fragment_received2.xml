@@ -1,0 +1,18 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.guo.duoduo.anyshareofandroid.ui.setting.fragment.ReceivedApp">
+
+
+    <Button
+        android:id="@+id/received_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:text="Open Folder"
+        android:layout_margin="100dp"
+        android:background="#58c2f9"
+        />
+</FrameLayout>

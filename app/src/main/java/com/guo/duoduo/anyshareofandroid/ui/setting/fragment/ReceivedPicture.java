@@ -25,39 +25,33 @@ import java.io.File;
 /**
  * show the received images, click item to browse the big one
  */
-public class ReceivedPicture extends Fragment
-{
+public class ReceivedPicture extends Fragment {
 
-    Context context ;
+    Context context;
     private View mView;
 
-    public static ReceivedPicture newInstance()
-    {
+    public static ReceivedPicture newInstance() {
         ReceivedPicture fragment = new ReceivedPicture();
         return fragment;
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState)
-    {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
 
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-            Bundle savedInstanceState)
-    {
-        if (mView == null)
-        {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        if (mView == null) {
             mView = inflater.inflate(R.layout.fragment_received2, container, false);
-           mView.findViewById(R.id.received_button).setOnClickListener(new View.OnClickListener() {
-               @Override
-               public void onClick(View v) {
-                   openFolder();
-               }
-           });
+            mView.findViewById(R.id.received_button).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    openFolder();
+                }
+            });
 
 
         }
@@ -66,15 +60,13 @@ public class ReceivedPicture extends Fragment
     }
 
     @Override
-    public void onAttach(Activity activity)
-    {
+    public void onAttach(Activity activity) {
         super.onAttach(activity);
-        context = activity ;
+        context = activity;
     }
 
     @Override
-    public void onDetach()
-    {
+    public void onDetach() {
         super.onDetach();
     }
 
@@ -91,7 +83,7 @@ public class ReceivedPicture extends Fragment
                     try {
                         startActivity(intent);
                     } catch (Exception e) {
-                        Toast.makeText(context, "receiving path :" + P2PManager.getSavePath(1), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context, "receiving path :" + P2PManager.getSavePath(1), Toast.LENGTH_LONG).show();
                     }
                 } else {
                     Toast.makeText(context, "no receiving content", Toast.LENGTH_SHORT).show();
