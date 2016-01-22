@@ -6,7 +6,9 @@ import java.util.ArrayList;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -46,7 +48,11 @@ public class ReceivedAppAdapter extends RecyclerView.Adapter<ReceivedAppAdapter.
 
         if (app == null || holder == null) return;
 
-        holder.mIcon.setImageBitmap(((BitmapDrawable) app.getFileIcon()).getBitmap());
+        Drawable drawable = (BitmapDrawable) app.getFileIcon();
+        if (drawable != null) {
+            holder.mIcon.setImageBitmap(((BitmapDrawable) app.getFileIcon()).getBitmap());
+        }
+
         holder.mName.setText(app.getFileName());
         holder.mSize.setText(app.getFileSize());
 

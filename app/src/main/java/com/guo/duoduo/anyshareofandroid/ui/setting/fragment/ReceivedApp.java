@@ -29,8 +29,7 @@ import com.guo.duoduo.p2pmanager.p2pcore.P2PManager;
 /**
  * show the received app files, click the item to install
  */
-public class ReceivedApp extends Fragment
-{
+public class ReceivedApp extends Fragment {
 
     private static final String tag = ReceivedApp.class.getSimpleName();
 
@@ -40,18 +39,14 @@ public class ReceivedApp extends Fragment
     private TextView mNoContentTextView;
     private View mView;
 
-    public static ReceivedApp newInstance()
-    {
+    public static ReceivedApp newInstance() {
         ReceivedApp fragment = new ReceivedApp();
         return fragment;
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-            Bundle savedInstanceState)
-    {
-        if (mView == null)
-        {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        if (mView == null) {
             mView = inflater.inflate(R.layout.fragment_received, container, false);
             mRecyclerView = (RecyclerView) mView.findViewById(R.id.received_recyclerview);
             mRecyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 4));
@@ -63,46 +58,36 @@ public class ReceivedApp extends Fragment
     }
 
     @Override
-    public void onAttach(Activity activity)
-    {
+    public void onAttach(Activity activity) {
         super.onAttach(activity);
     }
 
     @Override
-    public void onDetach()
-    {
+    public void onDetach() {
         super.onDetach();
     }
 
-    private void initData()
-    {
+    private void initData() {
         String appDir = P2PManager.getSavePath(P2PConstant.TYPE.APP);
         Log.d(tag, "app dir = " + appDir);
 
-        if (!TextUtils.isEmpty(appDir))
-        {
+        if (!TextUtils.isEmpty(appDir)) {
             File appFile = new File(appDir);
-            if (appFile.exists() && appFile.isDirectory())
-            {
+            if (appFile.exists() && appFile.isDirectory()) {
                 File[] appFileArray = appFile.listFiles();
-                if (appFileArray != null && appFileArray.length > 0)
-                {
+                if (appFileArray != null && appFileArray.length > 0) {
                     mRecyclerView.setVisibility(View.VISIBLE);
                     mNoContentTextView.setVisibility(View.GONE);
                     mAppList = new ArrayList<>();
-                    for (File app : appFileArray)
-                    {
+                    for (File app : appFileArray) {
                         AppInfo appInfo = new AppInfo();
-                        if (app.isFile() && app.getAbsolutePath().endsWith(".apk"))
-                        {
+                        if (app.isFile() && app.getAbsolutePath().endsWith(".apk")) {
                             appInfo.appLabel = app.getName();
                             appInfo.appSize = DeviceUtils.convertByte(app.length());
-                            appInfo.appIcon = ApkTools.geTApkIcon(getActivity(),
-                                app.getAbsolutePath());
+                            appInfo.appIcon = ApkTools.geTApkIcon(getActivity(), app.getAbsolutePath());
                             appInfo.appFilePath = app.getAbsolutePath();
 
-                            if (!mAppList.contains(appInfo))
-                                mAppList.add(appInfo);
+                            if (!mAppList.contains(appInfo)) mAppList.add(appInfo);
                         }
                     }
 

@@ -88,8 +88,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         public boolean onMenuItemClick(MenuItem menuItem) {
             switch (menuItem.getItemId()) {
                 case R.id.menu_item_receive_directory:
-//                    startActivity(new Intent(MainActivity.this, FileBrowseActivity.class));
-                    openFolder();
+                    startActivity(new Intent(MainActivity.this, FileBrowseActivity.class));
+//                    openFolder();
                     break;
                 case R.id.menu_item_about:
                     startActivity(new Intent(MainActivity.this, AboutActivity.class));

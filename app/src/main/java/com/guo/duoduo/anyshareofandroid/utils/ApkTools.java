@@ -12,18 +12,17 @@ import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.util.DisplayMetrics;
 
+import com.guo.duoduo.anyshareofandroid.R;
 
-public class ApkTools
-{
 
-    public static Drawable geTApkIcon(Context context, String Path)
-    {
+public class ApkTools {
+
+    public static Drawable geTApkIcon(Context context, String Path) {
         // 未安装的程序通过apk文件获取icon
         String apkPath = Path; // apk 文件所在的路径
         String PATH_PackageParser = "android.content.pm.PackageParser";
         String PATH_AssetManager = "android.content.res.AssetManager";
-        try
-        {
+        try {
             Class<?> pkgParserCls = Class.forName(PATH_PackageParser);
             Class<?>[] typeArgs = {String.class};
             Constructor<?> pkgParserCt = pkgParserCls.getConstructor(typeArgs);
@@ -31,21 +30,17 @@ public class ApkTools
             Object pkgParser = pkgParserCt.newInstance(valueArgs);
             DisplayMetrics metrics = new DisplayMetrics();
             metrics.setToDefaults();
-            typeArgs = new Class<?>[]{File.class, String.class, DisplayMetrics.class,
-                int.class};
-            Method pkgParser_parsePackageMtd = pkgParserCls.getDeclaredMethod(
-                "parsePackage", typeArgs);
+            typeArgs = new Class<?>[]{File.class, String.class, DisplayMetrics.class, int.class};
+            Method pkgParser_parsePackageMtd = pkgParserCls.getDeclaredMethod("parsePackage", typeArgs);
             valueArgs = new Object[]{new File(apkPath), apkPath, metrics, 0};
             Object pkgParserPkg = pkgParser_parsePackageMtd.invoke(pkgParser, valueArgs);
-            Field appInfoFld = pkgParserPkg.getClass()
-                    .getDeclaredField("applicationInfo");
+            Field appInfoFld = pkgParserPkg.getClass().getDeclaredField("applicationInfo");
             ApplicationInfo info = (ApplicationInfo) appInfoFld.get(pkgParserPkg);
             Class<?> assetMagCls = Class.forName(PATH_AssetManager);
             Object assetMag = assetMagCls.newInstance();
             typeArgs = new Class[1];
             typeArgs[0] = String.class;
-            Method assetMag_addAssetPathMtd = assetMagCls.getDeclaredMethod(
-                "addAssetPath", typeArgs);
+            Method assetMag_addAssetPathMtd = assetMagCls.getDeclaredMethod("addAssetPath", typeArgs);
             valueArgs = new Object[1];
             valueArgs[0] = apkPath;
             assetMag_addAssetPathMtd.invoke(assetMag, valueArgs);
@@ -60,17 +55,13 @@ public class ApkTools
             valueArgs[1] = res.getDisplayMetrics();
             valueArgs[2] = res.getConfiguration();
             res = (Resources) resCt.newInstance(valueArgs);
-            if (info != null)
-            {
-                if (info.icon != 0)
-                {
+            if (info != null) {
+                if (info.icon != 0) {
                     Drawable icon = res.getDrawable(info.icon);
                     return icon;
                 }
             }
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return null;
