@@ -18,3 +18,7 @@
 /gradlew
 /gradle.properties
 /gradle
+build
+/RadarScanView/build
+/randomtextview/build
+/rippleoutlayout/build

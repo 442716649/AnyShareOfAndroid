@@ -140,7 +140,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 }
             }, 2 * 1000);
         } else {
-            builder.setMessage("Input in PC browser IP：http://" + ip + ":" + Constant.Config.PORT + Constant.Config.Web_Root + " " + " hit the Enter key.");
+            builder.setMessage("Input in PC browser IP：http://" + ip + ":" + Constant.Config.PORT + Constant.Config.Web_Root + " " + " then hit the Enter key.");
         }
         builder.setPositiveButton("ok", new DialogInterface.OnClickListener() { //设置确定按钮
             @Override

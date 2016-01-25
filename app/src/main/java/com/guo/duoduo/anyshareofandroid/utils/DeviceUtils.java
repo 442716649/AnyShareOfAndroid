@@ -1,11 +1,16 @@
 package com.guo.duoduo.anyshareofandroid.utils;
 
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.text.DecimalFormat;
+import java.util.ArrayList;
+import java.util.List;
 
 import android.media.ExifInterface;
 import android.os.Build;
@@ -25,6 +30,49 @@ public class DeviceUtils
             ishtc = true;
         }
         return ishtc;
+    }
+    /**
+     * 是否需要检测外置sd卡路径 (android4.4版本不能读写)
+     *
+     * @return
+     */
+    public static boolean needCheckExtSDCard() {
+        int sdk_int = android.os.Build.VERSION.SDK_INT;
+        if (sdk_int == 19 || sdk_int == 20)
+            return true;
+        return false;
+    }
+    /**
+     * 获取外置SD卡路径
+     *
+     * @return 应该就一条记录或空
+     */
+    public static String getExtSDCardPath() {
+        List<String> lResult = new ArrayList();
+        try {
+            Runtime rt = Runtime.getRuntime();
+            Process proc = rt.exec("mount");
+            InputStream is = proc.getInputStream();
+            InputStreamReader isr = new InputStreamReader(is);
+            BufferedReader br = new BufferedReader(isr);
+            String line;
+            while ((line = br.readLine()) != null) {
+                if (line.contains("extSdCard")) {
+                    String[] arr = line.split(" ");
+                    String path = arr[1];
+                    File file = new File(path);
+                    if (file.isDirectory()) {
+                        lResult.add(path);
+                    }
+                }
+            }
+            isr.close();
+        } catch (Exception e) {
+        }
+        if (lResult.size() == 0)
+            return null;
+        else
+            return lResult.get(0);
     }
 
     public static String convertByte(long size)

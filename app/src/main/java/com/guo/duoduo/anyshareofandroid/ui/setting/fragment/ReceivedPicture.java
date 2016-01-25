@@ -72,8 +72,8 @@ public class ReceivedPicture extends Fragment {
 
     public void openFolder() {
 
-        if (!TextUtils.isEmpty(P2PManager.getSavePath(1))) {
-            File file = new File(P2PManager.getSavePath(1));
+        if (!TextUtils.isEmpty(P2PManager.getSaveDir())) {
+            File file = new File(P2PManager.getSaveDir());
             if (file.exists() && file.isDirectory()) {
                 File[] appFileArray = file.listFiles();
                 if (appFileArray != null && appFileArray.length > 0) {
@@ -83,7 +83,7 @@ public class ReceivedPicture extends Fragment {
                     try {
                         startActivity(intent);
                     } catch (Exception e) {
-                        Toast.makeText(context, "receiving path :" + P2PManager.getSavePath(1), Toast.LENGTH_LONG).show();
+                        Toast.makeText(context, "receiving path :" + P2PManager.getSaveDir(), Toast.LENGTH_LONG).show();
                     }
                 } else {
                     Toast.makeText(context, "no receiving content", Toast.LENGTH_SHORT).show();

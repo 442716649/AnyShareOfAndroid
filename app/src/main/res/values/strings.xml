@@ -44,5 +44,8 @@
     <string name="about_receive_path">receiving path</string>
 
     <string name="no_received_content">no receiving content</string>
+    <string name="video">videos</string>
+    <string name="audio">audios</string>
+    <string name="others">others</string>
 
 </resources>

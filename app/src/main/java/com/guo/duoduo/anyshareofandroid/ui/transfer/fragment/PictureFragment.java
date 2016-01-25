@@ -199,7 +199,7 @@ public class PictureFragment extends Fragment
 
             Log.d(tag, "pic size =" + picInfo.size());
             Message msg = Message.obtain();
-            msg.what = Constant.MSG.PICTURE_OK;
+            msg.what = Constant.MSG.VIDEO_OK;
             msg.obj = picInfo;
             handler.sendMessage(msg);
         }
@@ -227,7 +227,7 @@ public class PictureFragment extends Fragment
 
             switch (msg.what)
             {
-                case Constant.MSG.PICTURE_OK :
+                case Constant.MSG.VIDEO_OK:
                     fragment.picList.clear();
                     fragment.picList.addAll((ArrayList<IInfo>) msg.obj);
                     fragment.progressBar.setVisibility(View.GONE);

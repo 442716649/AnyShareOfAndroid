@@ -41,7 +41,7 @@ public class FileBrowseActivity extends BaseActivity
     {
         List<String> titles = new ArrayList<>();
         titles.add(getString(R.string.app));
-        titles.add(getString(R.string.picture));
+        titles.add(getString(R.string.others));
 
         mTabLayout = (TabLayout) findViewById(R.id.activity_receive_browse_tabLayout);
         mTabLayout.addTab(mTabLayout.newTab().setText(titles.get(0)));

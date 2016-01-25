@@ -10,13 +10,12 @@ import com.guo.duoduo.anyshareofandroid.R;
  */
 public class Constant
 {
-    public static final String WIFI_HOT_SPOT_SSID_PREFIX = MyApplication.getInstance()
-            .getString(R.string.app_name);
+    public static final String WIFI_HOT_SPOT_SSID_PREFIX = "FastShare";
     public static final String FREE_SERVER = "192.168.43.1";
 
     public interface MSG
     {
-        public static final int PICTURE_OK = 0;
+        public static final int VIDEO_OK = 0;
         public static final int APP_OK = 1;
     }
 

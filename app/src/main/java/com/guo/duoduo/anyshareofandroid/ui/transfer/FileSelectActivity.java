@@ -20,8 +20,10 @@ import com.guo.duoduo.anyshareofandroid.sdk.cache.Cache;
 import com.guo.duoduo.anyshareofandroid.ui.common.BaseActivity;
 import com.guo.duoduo.anyshareofandroid.ui.transfer.fragment.AppFragment;
 import com.guo.duoduo.anyshareofandroid.ui.common.FragmentAdapter;
+import com.guo.duoduo.anyshareofandroid.ui.transfer.fragment.AudioFragment;
 import com.guo.duoduo.anyshareofandroid.ui.transfer.fragment.OnSelectItemClickListener;
 import com.guo.duoduo.anyshareofandroid.ui.transfer.fragment.PictureFragment;
+import com.guo.duoduo.anyshareofandroid.ui.transfer.fragment.VideoFragment;
 import com.guo.duoduo.anyshareofandroid.utils.ToastUtils;
 
 
@@ -58,34 +60,34 @@ public class FileSelectActivity extends BaseActivity implements OnSelectItemClic
             userName = intent.getStringExtra("name");
         }
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.activity_file_fab);
-        fab.setOnClickListener(new View.OnClickListener()
-        {
+        fab.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view)
-            {
+            public void onClick(View view) {
                 if (Cache.selectedList.size() > 0)
-                    startActivity(new Intent(FileSelectActivity.this,
-                        RadarScanActivity.class).putExtra("name", userName));
+                    startActivity(new Intent(FileSelectActivity.this, RadarScanActivity.class).putExtra("name", userName));
                 else
-                    ToastUtils.showTextToast(getApplicationContext(),
-                        getString(R.string.please_select_file));
+                    ToastUtils.showTextToast(getApplicationContext(), getString(R.string.please_select_file));
             }
         });
 
         List<String> titles = new ArrayList<>();
         titles.add(getString(R.string.app));
         titles.add(getString(R.string.picture));
-//        titles.add(getString(R.string.file));
+        titles.add(getString(R.string.audio));
+        titles.add(getString(R.string.video));
 
         tabLayout = (TabLayout) findViewById(R.id.activity_file_tabLayout);
         tabLayout.addTab(tabLayout.newTab().setText(titles.get(0)));
         tabLayout.addTab(tabLayout.newTab().setText(titles.get(1)));
-//        tabLayout.addTab(tabLayout.newTab().setText(titles.get(2)));
+        tabLayout.addTab(tabLayout.newTab().setText(titles.get(2)));
+        tabLayout.addTab(tabLayout.newTab().setText(titles.get(3)));
 
         viewPager = (ViewPager) findViewById(R.id.activity_file_viewpager);
         List<android.support.v4.app.Fragment> fragments = new ArrayList<>();
         fragments.add(new AppFragment());
         fragments.add(new PictureFragment());
+        fragments.add(new AudioFragment());
+        fragments.add(new VideoFragment());
 
 
         FragmentAdapter adapter = new FragmentAdapter(getSupportFragmentManager(),
