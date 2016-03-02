@@ -11,18 +11,21 @@ android {
         versionCode 1
         versionName "1.0"
         manifestPlaceholders = [
-                UMENG_APPKEY_VALUE: "",
+                UMENG_APPKEY_VALUE: "56a5d407e0f55a8a820006e7",
+                TD_APP_ID_VALUE   : "DD4369C54316965D7C878251AA3D74D2",
 
         ]
     }
-
+    lintOptions {
+        abortOnError false
+    }
     //签名
     signingConfigs {
         myConfig {
-            storeFile file("key.keystore")
-            storePassword "key123456"
-            keyAlias "com.android.key"
-            keyPassword "key123456"
+            storeFile file("applock.jks")
+            storePassword "applock"
+            keyAlias "applock"
+            keyPassword "applock"
         }
     }
 //混淆
@@ -35,7 +38,10 @@ android {
             signingConfig signingConfigs.myConfig
         }
         debug {
-            buildConfigField "boolean", "ISDEBUG", "true"
+            zipAlignEnabled true
+            minifyEnabled false
+            buildConfigField "boolean", "ISDEBUG", "false"
+            signingConfig signingConfigs.myConfig
         }
     }
     //多渠道配置
@@ -43,8 +49,9 @@ android {
         apps9 {
 
             manifestPlaceholders = [
-                    UMENG_CHANNEL_VALUE: "9apps",
-
+                    UMENG_CHANNEL_VALUE : "9apps",
+                    SAILER_CHANNEL_VALUE: "A3537",
+                    SAILER_PRODUCT_VALUE: "A2187",
             ]
         }
     }
@@ -79,4 +86,11 @@ dependencies {
     compile 'com.android.support:recyclerview-v7:23.1.0'
     compile 'com.android.support:cardview-v7:23.1.0'
     compile 'com.github.bumptech.glide:glide:3.5.2'
+
+    compile project(':sdk-lite')
+    compile project(':ucparsdk')
+    compile project(':countlibrary')
+    provided files('libs/TalkingDataAnalytics_V1.2.79.jar')
+    provided files('libs/umeng-analytics-v5.2.11.jar')
+
 }

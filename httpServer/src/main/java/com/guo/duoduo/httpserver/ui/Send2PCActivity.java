@@ -20,23 +20,20 @@ import com.guo.duoduo.httpserver.utils.Constant;
 import com.guo.duoduo.httpserver.utils.Network;
 
 
-public class Send2PCActivity extends AppCompatActivity
-{
+public class Send2PCActivity extends AppCompatActivity {
 
     private TextView hint;
     private MainHandler handler;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState)
-    {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_send2pc);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.activity_send2pc_toolbar);
         setSupportActionBar(toolbar);
         ActionBar actionBar = getSupportActionBar();
-        if (actionBar != null)
-            actionBar.setDisplayHomeAsUpEnabled(true);
+        if (actionBar != null) actionBar.setDisplayHomeAsUpEnabled(true);
 
         handler = new MainHandler(this);
 
@@ -45,29 +42,22 @@ public class Send2PCActivity extends AppCompatActivity
         startService(new Intent(getApplicationContext(), WebService.class));
     }
 
-    private void initView()
-    {
+    private void initView() {
         hint = (TextView) findViewById(R.id.hint);
 
         String ip = Network.getLocalIp(getApplicationContext());
-        if (TextUtils.isEmpty(ip))
-        {
+        if (TextUtils.isEmpty(ip)) {
             Message msg = new Message();
             msg.what = Constant.MSG.GET_NETWORK_ERROR;
             handler.sendMessage(msg);
-        }
-        else
-        {
-            hint.setText("Input in PC browser IP：http://" + ip + ":" + Constant.Config.PORT
-                + Constant.Config.Web_Root + " " + " hit the Enter key.");
+        } else {
+            hint.setText("Input in PC browser IP：http://" + ip + ":" + Constant.Config.PORT + Constant.Config.Web_Root + " " + " hit the Enter key.");
         }
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item)
-    {
-        if (item.getItemId() == android.R.id.home)
-        {
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
             finish();
             return true;
         }
@@ -75,42 +65,34 @@ public class Send2PCActivity extends AppCompatActivity
     }
 
     @Override
-    public void onDestroy()
-    {
+    public void onDestroy() {
         super.onDestroy();
         handler.removeCallbacksAndMessages(null);
         stopService(new Intent(getApplicationContext(), WebService.class));
     }
 
-    private static class MainHandler extends Handler
-    {
+    private static class MainHandler extends Handler {
         private WeakReference<Send2PCActivity> weakReference;
 
-        public MainHandler(Send2PCActivity activity)
-        {
+        public MainHandler(Send2PCActivity activity) {
             weakReference = new WeakReference<Send2PCActivity>(activity);
         }
 
         @Override
-        public void handleMessage(Message msg)
-        {
+        public void handleMessage(Message msg) {
             final Send2PCActivity activity = weakReference.get();
-            if (activity == null)
-                return;
+            if (activity == null) return;
 
-            switch (msg.what)
-            {
-                case Constant.MSG.GET_NETWORK_ERROR :
+            switch (msg.what) {
+                case Constant.MSG.GET_NETWORK_ERROR:
                     activity.hint.setText("network address acquisition failure, will exit the program");
-                    activity.handler.postDelayed(new Runnable()
-                    {
+                    activity.handler.postDelayed(new Runnable() {
                         @Override
-                        public void run()
-                        {
+                        public void run() {
                             activity.finish();
                             android.os.Process.killProcess(android.os.Process.myPid());
-            }
-        }, 2 * 1000);
+                        }
+                    }, 2 * 1000);
                     break;
             }
         }

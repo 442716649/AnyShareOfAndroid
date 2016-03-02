@@ -1,1 +1,7 @@
 include ':app', ':RadarScanView', ':randomtextview', ':rippleview', ':rippleoutlayout', ':p2pmanager', 'httpServer'
+include(':sdk-lite')
+project(':sdk-lite').projectDir = new File(settingsDir, '../../sdk-lite/sdk-lite')
+include(':ucparsdk')
+project(':ucparsdk').projectDir = new File(settingsDir, '../../ucparsdk')
+include(':countlibrary')
+project(':countlibrary').projectDir = new File(settingsDir, '../../CountSDK/countlibrary')
