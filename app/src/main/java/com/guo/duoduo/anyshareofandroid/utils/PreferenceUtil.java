@@ -4,11 +4,13 @@ package com.guo.duoduo.anyshareofandroid.utils;
 import android.content.Context;
 import android.content.SharedPreferences;
 
+import com.guo.duoduo.anyshareofandroid.ui.main.MainActivity;
+
 
 /**
  * Created by 郭攀峰 on 2015/9/19.
  */
-public class PreferenceUtils
+public class PreferenceUtil
 {
     private static final String FILE_NAME = "melon_share";
 
@@ -88,4 +90,6 @@ public class PreferenceUtils
 
         return null;
     }
+
+
 }

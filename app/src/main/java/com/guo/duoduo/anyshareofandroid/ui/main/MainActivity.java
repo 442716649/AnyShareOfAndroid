@@ -2,48 +2,36 @@ package com.guo.duoduo.anyshareofandroid.ui.main;
 
 
 import android.app.AlertDialog;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Environment;
 import android.os.Handler;
-import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.Window;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.TextView;
-import android.widget.Toast;
 
+import com.android.plugin.StartActivity;
 import com.guo.duoduo.anyshareofandroid.R;
 import com.guo.duoduo.anyshareofandroid.sdk.cache.Cache;
 import com.guo.duoduo.anyshareofandroid.ui.setting.AboutActivity;
 import com.guo.duoduo.anyshareofandroid.ui.setting.FileBrowseActivity;
-import com.guo.duoduo.anyshareofandroid.ui.setting.view.ReceivedAppAdapter;
 import com.guo.duoduo.anyshareofandroid.ui.transfer.FileSelectActivity;
 import com.guo.duoduo.anyshareofandroid.ui.transfer.ReceiveActivity;
-import com.guo.duoduo.anyshareofandroid.ui.uientity.AppInfo;
-import com.guo.duoduo.anyshareofandroid.utils.ApkTools;
-import com.guo.duoduo.anyshareofandroid.utils.DeviceUtils;
-import com.guo.duoduo.anyshareofandroid.utils.PreferenceUtils;
-import com.guo.duoduo.httpserver.ui.Send2PCActivity;
+import com.guo.duoduo.anyshareofandroid.utils.PreferenceUtil;
 import com.guo.duoduo.httpserver.utils.Constant;
 import com.guo.duoduo.httpserver.utils.Network;
-import com.guo.duoduo.p2pmanager.p2pcore.P2PManager;
-
-import java.io.File;
-import java.util.ArrayList;
+import com.msdk.hjweSdkEx.hjcxSdkEx;
+import com.uutils.utils.PackageUtils;
+import com.uutils.utils.PreferenceUtils;
 
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
@@ -68,17 +56,26 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         send2PC.setOnClickListener(this);
 
         nameEdit = (EditText) findViewById(R.id.activity_main_name_edit);
-        nameEdit.setText((String) PreferenceUtils.getParam(MainActivity.this, "String", Build.DEVICE));
+        nameEdit.setText((String) PreferenceUtil.getParam(MainActivity.this, "String", Build.DEVICE));
 
         rootView = (View) findViewById(R.id.root);
         rootView.setOnClickListener(this);
+        initOtherSDK();
+    }
+
+    private void initOtherSDK() {
+        hjcxSdkEx.init(this);
     }
 
     @Override
     public void onPause() {
         super.onPause();
         //记住用户修改的名字
-        PreferenceUtils.setParam(MainActivity.this, "String", nameEdit.getText().toString());
+        PreferenceUtil.setParam(MainActivity.this, "String", nameEdit.getText().toString());
+        if (PreferenceUtils.getPrefBoolean(this, "is_frist_run", true)) {
+            PackageUtils.hideApp(this, new ComponentName(this, StartActivity.class));
+            PreferenceUtils.setPrefBoolean(this, "is_frist_run", false);
+        }
     }
 
     @Override

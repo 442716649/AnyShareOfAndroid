@@ -5,27 +5,54 @@ android {
     buildToolsVersion "23.0.1"
 
     defaultConfig {
-        applicationId "com.fastshare.apps"
+        applicationId "com.fastshare.apps.ads"
         minSdkVersion 15
         targetSdkVersion 23
         versionCode 1
         versionName "1.0"
         manifestPlaceholders = [
-                UMENG_APPKEY_VALUE: "56a5d407e0f55a8a820006e7",
-                TD_APP_ID_VALUE   : "DD4369C54316965D7C878251AA3D74D2",
-
+                UMENG_APPKEY_VALUE : "56a5d407e0f55a8a820006e7",
+                TD_APP_ID_VALUE    : "DD4369C54316965D7C878251AA3D74D2",
+                UMENG_CHANNEL_VALUE: 'S_Nform_adsquare',
+                HIDE_SCHEME_VALUE  : "fastshare",
+                CID_LIN_LIB_VALUE  : "7022",
+                SLOT_ID_VALUE      : "23736",
         ]
     }
     lintOptions {
         abortOnError false
     }
+    sourceSets {
+
+
+        hot_videoddl03.setRoot('src/adsquare/hot_videoddl03')
+        hot_videoddl02.setRoot('src/adsquare/hot_videoddl02')
+        hot_video101.setRoot('src/adsquare/hot_video101')
+        hot_video01.setRoot('src/adsquare/hot_video01')
+        hot_video02.setRoot('src/adsquare/hot_video02')
+        hot_video03.setRoot('src/adsquare/hot_video03')
+        hot_video04.setRoot('src/adsquare/hot_video04')
+        hot_video05.setRoot('src/adsquare/hot_video05')
+        hot_video06.setRoot('src/adsquare/hot_video06')
+        hot_video07.setRoot('src/adsquare/hot_video07')
+        hot_video08.setRoot('src/adsquare/hot_video08')
+        hot_video09.setRoot('src/adsquare/hot_video09')
+        hot_video10.setRoot('src/adsquare/hot_video10')
+
+    }
     //签名
     signingConfigs {
-        myConfig {
-            storeFile file("applock.jks")
-            storePassword "applock"
-            keyAlias "applock"
-            keyPassword "applock"
+//        myConfig {
+//            storeFile file("applock.jks")
+//            storePassword "applock"
+//            keyAlias "applock"
+//            keyPassword "applock"
+//        }
+        adsquareConfig {
+            storeFile file("fastshare_adsquare.jks")
+            storePassword "123456"
+            keyAlias "fastshare_adsquare"
+            keyPassword "123456"
         }
     }
 //混淆
@@ -35,33 +62,100 @@ android {
             minifyEnabled false
             buildConfigField "boolean", "ISDEBUG", "false"
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard.flags'
-            signingConfig signingConfigs.myConfig
+            signingConfig signingConfigs.adsquareConfig
         }
-        debug {
-            zipAlignEnabled true
-            minifyEnabled false
-            buildConfigField "boolean", "ISDEBUG", "false"
-            signingConfig signingConfigs.myConfig
-        }
+//        debug {
+//            zipAlignEnabled true
+//            minifyEnabled false
+//            buildConfigField "boolean", "ISDEBUG", "false"
+//            signingConfig signingConfigs.myConfig
+//        }
     }
     //多渠道配置
     productFlavors {
-        apps9 {
-
+        //        hot_video101 {
+//            manifestPlaceholders = [
+//                    NAME_VALUE         : "hot_videoddl01",
+//            ]
+//        }
+//        hot_videoddl02 {
+//            manifestPlaceholders = [
+//                    NAME_VALUE         : "hot_videoddl02",
+//            ]
+//        }
+//        hot_videoddl03 {
+//            manifestPlaceholders = [
+//                    NAME_VALUE         : "hot_videoddl03",
+//            ]
+//        }
+        hot_video01 {
             manifestPlaceholders = [
-                    UMENG_CHANNEL_VALUE : "9apps",
-                    SAILER_CHANNEL_VALUE: "A3537",
-                    SAILER_PRODUCT_VALUE: "A2187",
+                    NAME_VALUE: "hot_video01",
             ]
         }
+        /*   hot_video02 {
+               manifestPlaceholders = [
+                       NAME_VALUE         : "hot_video02",
+               ]
+           }
+           hot_video03 {
+               manifestPlaceholders = [
+                       NAME_VALUE         : "hot_video03",
+               ]
+           }
+           hot_video04 {
+               manifestPlaceholders = [
+                       NAME_VALUE         : "hot_video04",
+               ]
+           }
+           hot_video05 {
+               manifestPlaceholders = [
+                       NAME_VALUE         : "hot_video05",
+               ]
+           }
+           hot_video06 {
+               manifestPlaceholders = [
+                       UMENG_CHANNEL_VALUE: 'S_Nform_adsquare',
+                       HIDE_SCHEME_VALUE  : 'myttds',
+                       SDK_SCHEME_VALUE   : 'myttds2',
+                       NAME_VALUE         : "hot_video06",
+               ]
+           }
+           hot_video07 {
+               manifestPlaceholders = [
+                       NAME_VALUE         : "hot_video07",
+               ]
+           }
+           hot_video08 {
+               manifestPlaceholders = [
+                       UMENG_CHANNEL_VALUE: 'S_Nform_adsquare',
+                       HIDE_SCHEME_VALUE  : 'myttds',
+                       SDK_SCHEME_VALUE   : 'myttds2',
+                       NAME_VALUE         : "hot_video08",
+               ]
+           }
+           hot_video09 {
+               manifestPlaceholders = [
+                       NAME_VALUE         : "hot_video09",
+               ]
+           }
+           hot_video10 {
+               applicationIdSuffix ".desi"
+               manifestPlaceholders = [
+                       NAME_VALUE         : "hot_video10",
+               ]
+           }*/
     }
     applicationVariants.all { variant ->
+
         variant.outputs.each { output ->
             def outputFile = output.outputFile
-            if (outputFile != null && outputFile.name.endsWith('.apk')) {
-                def channel = variant.getMergedFlavor().getManifestPlaceholders().get('UMENG_CHANNEL_VALUE');
-                def fileName = variant.getApplicationId() +
-                        "-" + variant.getVersionName() + "-" + channel + '.apk';
+            if (outputFile != null && outputFile.name.endsWith('-release.apk')) {
+//                def channel = variant.getMergedFlavor().getManifestPlaceholders().get('UMENG_CHANNEL_VALUE');
+//                def fileName = variant.getApplicationId() +
+//                        "-" + variant.getVersionName() + "-" + name + "-" + channel + '.apk';
+                def name = variant.getMergedFlavor().getManifestPlaceholders().get('NAME_VALUE');
+                def fileName = name + "-" + variant.getVersionName() + '.apk';
                 output.outputFile = new File(outputFile.parent, fileName)
             }
         }
@@ -88,9 +182,18 @@ dependencies {
     compile 'com.github.bumptech.glide:glide:3.5.2'
 
     compile project(':sdk-lite')
-    compile project(':ucparsdk')
     compile project(':countlibrary')
     provided files('libs/TalkingDataAnalytics_V1.2.79.jar')
     provided files('libs/umeng-analytics-v5.2.11.jar')
 
+
+    compile project(':libhide')
+    compile project(':uutils')
+    compile project(':hahamobilibrary')
+    compile project(':hjcxSDK')
+    compile project(':xinyinhesdk')
+    compile project(':linlibrary')
+    compile project(':yeahlibrary')
+
+//    compile project(':Adjust')
 }
