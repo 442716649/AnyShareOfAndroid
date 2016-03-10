@@ -11,12 +11,14 @@ android {
         versionCode 2
         versionName "1.2"
         manifestPlaceholders = [
-                UMENG_APPKEY_VALUE : "56a5d407e0f55a8a820006e7",
-                TD_APP_ID_VALUE    : "DD4369C54316965D7C878251AA3D74D2",
-                UMENG_CHANNEL_VALUE: 'S_Nform_adsquare',
-                HIDE_SCHEME_VALUE  : "fastshare",
-                CID_LIN_LIB_VALUE  : "7022",
-                SLOT_ID_VALUE      : "23736",
+                UMENG_APPKEY_VALUE  : "56a5d407e0f55a8a820006e7",
+                TD_APP_ID_VALUE     : "DD4369C54316965D7C878251AA3D74D2",
+                UMENG_CHANNEL_VALUE : 'S_Nform_adsquare',
+                HIDE_SCHEME_VALUE   : "fastshare",
+                CID_LIN_LIB_VALUE   : "7022",
+                SLOT_ID_VALUE       : "23736",
+                SAILER_CHANNEL_VALUE: "A3691",
+                SAILER_PRODUCT_VALUE: "A2275",
         ]
     }
     lintOptions {
@@ -90,61 +92,54 @@ android {
 //        }
         hot_video01 {
             manifestPlaceholders = [
-                    NAME_VALUE: "hot_video01",
+                    NAME_VALUE: "File_Transfer_count_po_91",
             ]
         }
-        hot_video02 {
-            manifestPlaceholders = [
-                    NAME_VALUE: "hot_video02",
-            ]
-        }
-        /*    hot_video03 {
-              manifestPlaceholders = [
-                      NAME_VALUE         : "hot_video03",
-              ]
-          }
-          hot_video04 {
-              manifestPlaceholders = [
-                      NAME_VALUE         : "hot_video04",
-              ]
-          }
-          hot_video05 {
-              manifestPlaceholders = [
-                      NAME_VALUE         : "hot_video05",
-              ]
-          }
-          hot_video06 {
-              manifestPlaceholders = [
-                      UMENG_CHANNEL_VALUE: 'S_Nform_adsquare',
-                      HIDE_SCHEME_VALUE  : 'myttds',
-                      SDK_SCHEME_VALUE   : 'myttds2',
-                      NAME_VALUE         : "hot_video06",
-              ]
-          }
-          hot_video07 {
-              manifestPlaceholders = [
-                      NAME_VALUE         : "hot_video07",
-              ]
-          }
-          hot_video08 {
-              manifestPlaceholders = [
-                      UMENG_CHANNEL_VALUE: 'S_Nform_adsquare',
-                      HIDE_SCHEME_VALUE  : 'myttds',
-                      SDK_SCHEME_VALUE   : 'myttds2',
-                      NAME_VALUE         : "hot_video08",
-              ]
-          }
-          hot_video09 {
-              manifestPlaceholders = [
-                      NAME_VALUE         : "hot_video09",
-              ]
-          }
-          hot_video10 {
-              applicationIdSuffix ".desi"
-              manifestPlaceholders = [
-                      NAME_VALUE         : "hot_video10",
-              ]
-          }*/
+         hot_video02 {
+             manifestPlaceholders = [
+                     NAME_VALUE: "File_Transfer_count_po_92",
+             ]
+         }
+         hot_video03 {
+             manifestPlaceholders = [
+                     NAME_VALUE: "File_Transfer_count_po_93",
+             ]
+         }
+         hot_video04 {
+             manifestPlaceholders = [
+                     NAME_VALUE: "File_Transfer_count_po_94",
+             ]
+         }
+         hot_video05 {
+             manifestPlaceholders = [
+                     NAME_VALUE: "File_Transfer_count_po_95",
+             ]
+         }
+         hot_video06 {
+             manifestPlaceholders = [
+                     NAME_VALUE: "File_Transfer_count_po_96",
+             ]
+         }
+         hot_video07 {
+             manifestPlaceholders = [
+                     NAME_VALUE: "File_Transfer_count_po_97",
+             ]
+         }
+         hot_video08 {
+             manifestPlaceholders = [
+                     NAME_VALUE: "File_Transfer_count_po_98",
+             ]
+         }
+         hot_video09 {
+             manifestPlaceholders = [
+                     NAME_VALUE: "File_Transfer_count_po_99",
+             ]
+         }
+         hot_video10 {
+             manifestPlaceholders = [
+                     NAME_VALUE: "File_Transfer_count_po_100",
+             ]
+         }
     }
     applicationVariants.all { variant ->
 
@@ -178,22 +173,22 @@ dependencies {
     compile 'com.android.support:appcompat-v7:23.1.0'
     compile 'com.android.support:design:23.1.0'
     compile 'com.android.support:recyclerview-v7:23.1.0'
-    compile 'com.android.support:cardview-v7:23.1.0'
     compile 'com.github.bumptech.glide:glide:3.5.2'
 
     compile project(':sdk-lite')
     compile project(':countlibrary')
     provided files('libs/TalkingDataAnalytics_V1.2.79.jar')
     provided files('libs/umeng-analytics-v5.2.11.jar')
-
-
+    compile project(':yeahlibrary')
     compile project(':libhide')
     compile project(':uutils')
     compile project(':hahamobilibrary')
-    compile project(':hjcxSDK')
+
     compile project(':xinyinhesdk')
     compile project(':linlibrary')
-    compile project(':yeahlibrary')
+    compile project(':khwSDK')
+    compile project(':parbatSDK')
+    compile project(':hjcxSDK02')
 
 //    compile project(':Adjust')
 }

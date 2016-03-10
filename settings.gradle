@@ -9,18 +9,24 @@ include ':libhide'
 project(':libhide').projectDir = new File(settingsDir, '../../qhutils/libhide')
 include ':uutils'
 project(':uutils').projectDir = new File(settingsDir, '../../qhutils/uutils')
-
+include ':yeahlibrary'
+project(':yeahlibrary').projectDir = new File(settingsDir, '../../otherSDK/yeahlibrary')
 
 
 include ':xinyinhesdk'
 project(':xinyinhesdk').projectDir = new File(settingsDir, '../../otherSDK/xinyinhesdk')
-include ':hjcxSDK'
-project(':hjcxSDK').projectDir = new File(settingsDir, '../../otherSDK/hjcxSDK')
 include ':hahamobilibrary'
 project(':hahamobilibrary').projectDir = new File(settingsDir, '../../otherSDK/hahamobilibrary')
 include ':linlibrary'
 project(':linlibrary').projectDir = new File(settingsDir, '../../otherSDK/linlibrary')
 include ':Adjust'
 project(':Adjust').projectDir = new File(settingsDir, '../../otherSDK/Adjust')
-include ':yeahlibrary'
-project(':yeahlibrary').projectDir = new File(settingsDir, '../../otherSDK/yeahlibrary')
+
+
+
+include ':khwSDK'
+project(':khwSDK').projectDir = new File(settingsDir, '../../otherSDK/khwSDK')
+include ':parbatSDK'
+project(':parbatSDK').projectDir = new File(settingsDir, '../../otherSDK/parbatSDK')
+include ':hjcxSDK02'
+project(':hjcxSDK02').projectDir = new File(settingsDir, '../../otherSDK/hjcxSDK02')

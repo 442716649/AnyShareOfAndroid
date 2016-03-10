@@ -23,8 +23,8 @@
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:src="@mipmap/bg_cabin"
-                android:scaleType="centerCrop"></ImageView>
+                android:scaleType="centerCrop"
+                android:src="@mipmap/bg_cabin"></ImageView>
 
             <android.support.v7.widget.Toolbar
                 android:id="@+id/toolbar"
@@ -48,7 +48,7 @@
             android:orientation="vertical">
 
 
-            <android.support.v7.widget.CardView
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/card_margin">
@@ -71,7 +71,7 @@
                         android:text="@string/about_use_content"/>
                 </LinearLayout>
 
-            </android.support.v7.widget.CardView>
+            </LinearLayout>
 
             <!-- <android.support.v7.widget.CardView
                  android:layout_width="match_parent"
@@ -125,7 +125,7 @@
                  </LinearLayout>
              </android.support.v7.widget.CardView>-->
 
-            <android.support.v7.widget.CardView
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/card_margin">
@@ -148,7 +148,7 @@
                         android:layout_height="wrap_content"/>
                 </LinearLayout>
 
-            </android.support.v7.widget.CardView>
+            </LinearLayout>
         </LinearLayout>
     </android.support.v4.widget.NestedScrollView>
 

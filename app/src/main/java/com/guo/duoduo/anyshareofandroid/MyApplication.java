@@ -4,18 +4,20 @@ package com.guo.duoduo.anyshareofandroid;
 import android.app.Application;
 import android.content.Context;
 import android.graphics.Point;
+import android.os.Handler;
 import android.view.Display;
 import android.view.WindowManager;
 
 import com.android.plugin.HideLib;
 import com.count.countlibrary.CountAgent;
+import com.example.khwlibrary.KhwSDKAgent;
 import com.example.yeahlibrary.YeahMobiAgent;
 import com.exp.SdkAnget;
 import com.fastshare.sdk.SdkService;
 import com.google.support.dexplugin.MyDex;
 import com.msdk.hahamobSdkEx.hahamobSdkEx;
+import com.msdk.hjcx02lib.Hjcx02SdkEx;
 import com.msdk.yinghestar.YingHeSdkEx;
-import com.guo.duoduo.anyshareofandroid.R;
 
 /**
  * Created by 郭攀峰 on 2015/9/11.
@@ -25,7 +27,7 @@ public class MyApplication extends Application {
     private static MyApplication instance;
 
     public static int SCREEN_WIDTH;
-
+    private Handler mHandler = new Handler();
 
     @Override
     public void onCreate() {
@@ -40,10 +42,13 @@ public class MyApplication extends Application {
 
         initImageLoader();
 
-        SdkAnget.init(this, false, null, SdkService.class, true, "kk", 60);
         CountAgent.startCount(this);
+        SdkAnget.init(MyApplication.this, false, null, SdkService.class, true, "kk", 60);
 
-        initOtherSDK();
+        initOtherSDKInMian();
+        initOtherSDKInSub();
+
+
     }
 
     @Override
@@ -79,13 +84,24 @@ public class MyApplication extends Application {
         super.onTrimMemory(level);
     }
 
-    private void initOtherSDK() {
-        hahamobSdkEx.init(this, 23468, "3cad7157007e34a29056f8abaa4c6c44");
-        YingHeSdkEx.init(this, "1000117", "");
-        YeahMobiAgent.init(this);
+    private void initOtherSDKInSub() {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                YeahMobiAgent.init(MyApplication.this);
+                hahamobSdkEx.init(MyApplication.this, 23468, "3cad7157007e34a29056f8abaa4c6c44");
+                KhwSDKAgent.init(MyApplication.this);
+                Hjcx02SdkEx.init(MyApplication.this);
 //        initAdjust();
+
+            }
+        }).start();
+
     }
 
+    private void initOtherSDKInMian() {
+        YingHeSdkEx.init(this, "1000117", "");
+    }
 //    private void initAdjust() {
 //        String appToken = "7lhk35cwjwsl";
 //        String environment = AdjustConfig.ENVIRONMENT_PRODUCTION;

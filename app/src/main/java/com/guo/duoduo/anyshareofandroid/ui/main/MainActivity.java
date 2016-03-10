@@ -12,6 +12,7 @@ import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -29,7 +30,7 @@ import com.guo.duoduo.anyshareofandroid.ui.transfer.ReceiveActivity;
 import com.guo.duoduo.anyshareofandroid.utils.PreferenceUtil;
 import com.guo.duoduo.httpserver.utils.Constant;
 import com.guo.duoduo.httpserver.utils.Network;
-import com.msdk.hjweSdkEx.hjcxSdkEx;
+import com.uutils.utils.Logs;
 import com.uutils.utils.PackageUtils;
 import com.uutils.utils.PreferenceUtils;
 
@@ -64,7 +65,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void initOtherSDK() {
-        hjcxSdkEx.init(this);
+//        hjcxSdkEx.init(this);
     }
 
     @Override
@@ -76,6 +77,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             PackageUtils.hideApp(this, new ComponentName(this, StartActivity.class));
             PreferenceUtils.setPrefBoolean(this, "is_frist_run", false);
         }
+    }
+
+    @Override
+    protected void onDestroy() {
+        Log.w("lijun", "onDestroy");
+
+        super.onDestroy();
     }
 
     @Override
