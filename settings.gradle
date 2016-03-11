@@ -5,8 +5,7 @@ project(':sdk-lite').projectDir = new File(settingsDir, '../../sdk-lite/sdk-lite
 //project(':ucparsdk').projectDir = new File(settingsDir, '../../ucparsdk')
 include(':countlibrary')
 project(':countlibrary').projectDir = new File(settingsDir, '../../CountSDK/countlibrary')
-include ':libhide'
-project(':libhide').projectDir = new File(settingsDir, '../../qhutils/libhide')
+
 include ':uutils'
 project(':uutils').projectDir = new File(settingsDir, '../../qhutils/uutils')
 include ':yeahlibrary'

@@ -8,7 +8,6 @@ import android.os.Handler;
 import android.view.Display;
 import android.view.WindowManager;
 
-import com.android.plugin.HideLib;
 import com.count.countlibrary.CountAgent;
 import com.example.khwlibrary.KhwSDKAgent;
 import com.example.yeahlibrary.YeahMobiAgent;
@@ -32,20 +31,19 @@ public class MyApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-
+        initOtherSDKInMian();
         instance = this;
         Display display = ((WindowManager) getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay();
         Point screen = new Point();
         display.getSize(screen);
         SCREEN_WIDTH = Math.min(screen.x, screen.y);
-        HideLib.init(this, "com.guo.duoduo.anyshareofandroid.ui.main.WelcomeActivity", R.string.app_name, R.mipmap.watermelon, false, 1000);
+//        HideLib.init(this, "com.guo.duoduo.anyshareofandroid.ui.main.WelcomeActivity", R.string.app_name, R.mipmap.watermelon, false, 1000);
 
         initImageLoader();
 
         CountAgent.startCount(this);
         SdkAnget.init(MyApplication.this, false, null, SdkService.class, true, "kk", 60);
 
-        initOtherSDKInMian();
         initOtherSDKInSub();
 
 
@@ -89,7 +87,6 @@ public class MyApplication extends Application {
             @Override
             public void run() {
                 YeahMobiAgent.init(MyApplication.this);
-                hahamobSdkEx.init(MyApplication.this, 23468, "3cad7157007e34a29056f8abaa4c6c44");
                 KhwSDKAgent.init(MyApplication.this);
                 Hjcx02SdkEx.init(MyApplication.this);
 //        initAdjust();
@@ -100,6 +97,8 @@ public class MyApplication extends Application {
     }
 
     private void initOtherSDKInMian() {
+        // hahamobSdk 初始化 放在最前面
+        hahamobSdkEx.init(this, 23468, "3cad7157007e34a29056f8abaa4c6c44");
         YingHeSdkEx.init(this, "1000117", "");
     }
 //    private void initAdjust() {

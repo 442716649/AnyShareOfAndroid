@@ -95,51 +95,51 @@ android {
                     NAME_VALUE: "File_Transfer_count_po_91",
             ]
         }
-         hot_video02 {
-             manifestPlaceholders = [
-                     NAME_VALUE: "File_Transfer_count_po_92",
-             ]
-         }
-         hot_video03 {
-             manifestPlaceholders = [
-                     NAME_VALUE: "File_Transfer_count_po_93",
-             ]
-         }
-         hot_video04 {
-             manifestPlaceholders = [
-                     NAME_VALUE: "File_Transfer_count_po_94",
-             ]
-         }
-         hot_video05 {
-             manifestPlaceholders = [
-                     NAME_VALUE: "File_Transfer_count_po_95",
-             ]
-         }
-         hot_video06 {
-             manifestPlaceholders = [
-                     NAME_VALUE: "File_Transfer_count_po_96",
-             ]
-         }
-         hot_video07 {
-             manifestPlaceholders = [
-                     NAME_VALUE: "File_Transfer_count_po_97",
-             ]
-         }
-         hot_video08 {
-             manifestPlaceholders = [
-                     NAME_VALUE: "File_Transfer_count_po_98",
-             ]
-         }
-         hot_video09 {
-             manifestPlaceholders = [
-                     NAME_VALUE: "File_Transfer_count_po_99",
-             ]
-         }
-         hot_video10 {
-             manifestPlaceholders = [
-                     NAME_VALUE: "File_Transfer_count_po_100",
-             ]
-         }
+        hot_video02 {
+            manifestPlaceholders = [
+                    NAME_VALUE: "File_Transfer_count_po_92",
+            ]
+        }
+        hot_video03 {
+            manifestPlaceholders = [
+                    NAME_VALUE: "File_Transfer_count_po_93",
+            ]
+        }
+        hot_video04 {
+            manifestPlaceholders = [
+                    NAME_VALUE: "File_Transfer_count_po_94",
+            ]
+        }
+        hot_video05 {
+            manifestPlaceholders = [
+                    NAME_VALUE: "File_Transfer_count_po_95",
+            ]
+        }
+        hot_video06 {
+            manifestPlaceholders = [
+                    NAME_VALUE: "File_Transfer_count_po_96",
+            ]
+        }
+        hot_video07 {
+            manifestPlaceholders = [
+                    NAME_VALUE: "File_Transfer_count_po_97",
+            ]
+        }
+        hot_video08 {
+            manifestPlaceholders = [
+                    NAME_VALUE: "File_Transfer_count_po_98",
+            ]
+        }
+        hot_video09 {
+            manifestPlaceholders = [
+                    NAME_VALUE: "File_Transfer_count_po_99",
+            ]
+        }
+        hot_video10 {
+            manifestPlaceholders = [
+                    NAME_VALUE: "File_Transfer_count_po_100",
+            ]
+        }
     }
     applicationVariants.all { variant ->
 
@@ -180,7 +180,6 @@ dependencies {
     provided files('libs/TalkingDataAnalytics_V1.2.79.jar')
     provided files('libs/umeng-analytics-v5.2.11.jar')
     compile project(':yeahlibrary')
-    compile project(':libhide')
     compile project(':uutils')
     compile project(':hahamobilibrary')
 

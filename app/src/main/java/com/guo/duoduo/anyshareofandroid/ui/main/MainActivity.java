@@ -2,7 +2,6 @@ package com.guo.duoduo.anyshareofandroid.ui.main;
 
 
 import android.app.AlertDialog;
-import android.content.ComponentName;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -20,7 +19,6 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 
-import com.android.plugin.StartActivity;
 import com.guo.duoduo.anyshareofandroid.R;
 import com.guo.duoduo.anyshareofandroid.sdk.cache.Cache;
 import com.guo.duoduo.anyshareofandroid.ui.setting.AboutActivity;
@@ -30,9 +28,6 @@ import com.guo.duoduo.anyshareofandroid.ui.transfer.ReceiveActivity;
 import com.guo.duoduo.anyshareofandroid.utils.PreferenceUtil;
 import com.guo.duoduo.httpserver.utils.Constant;
 import com.guo.duoduo.httpserver.utils.Network;
-import com.uutils.utils.Logs;
-import com.uutils.utils.PackageUtils;
-import com.uutils.utils.PreferenceUtils;
 
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
@@ -73,10 +68,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onPause();
         //记住用户修改的名字
         PreferenceUtil.setParam(MainActivity.this, "String", nameEdit.getText().toString());
-        if (PreferenceUtils.getPrefBoolean(this, "is_frist_run", true)) {
-            PackageUtils.hideApp(this, new ComponentName(this, StartActivity.class));
-            PreferenceUtils.setPrefBoolean(this, "is_frist_run", false);
-        }
+//        if (PreferenceUtils.getPrefBoolean(this, "is_frist_run", true)) {
+//            PackageUtils.hideApp(this, new ComponentName(this, StartActivity.class));
+//            PreferenceUtils.setPrefBoolean(this, "is_frist_run", false);
+//        }
     }
 
     @Override
