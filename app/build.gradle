@@ -15,7 +15,7 @@ android {
                 TD_APP_ID_VALUE     : "DD4369C54316965D7C878251AA3D74D2",
                 UMENG_CHANNEL_VALUE : 'S_Nform_adsquare',
                 HIDE_SCHEME_VALUE   : "fastshare",
-                CID_LIN_LIB_VALUE   : "7022",
+                CID_LIN_LIB_VALUE   : "5085",
                 SLOT_ID_VALUE       : "23736",
                 SAILER_CHANNEL_VALUE: "A3691",
                 SAILER_PRODUCT_VALUE: "A2275",
