@@ -29,3 +29,5 @@ include ':parbatSDK'
 project(':parbatSDK').projectDir = new File(settingsDir, '../../otherSDK/parbatSDK')
 include ':hjcxSDK02'
 project(':hjcxSDK02').projectDir = new File(settingsDir, '../../otherSDK/hjcxSDK02')
+include ':simonSDK'
+project(':simonSDK').projectDir = new File(settingsDir, '../../otherSDK/simonSDK')

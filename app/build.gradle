@@ -92,51 +92,61 @@ android {
 //        }
         hot_video01 {
             manifestPlaceholders = [
+                    SIMON_VALUE:"Shm061",
                     NAME_VALUE: "File_Transfer_count_po_91",
             ]
         }
         hot_video02 {
             manifestPlaceholders = [
+                    SIMON_VALUE:"Shm062",
                     NAME_VALUE: "File_Transfer_count_po_92",
             ]
         }
         hot_video03 {
             manifestPlaceholders = [
+                    SIMON_VALUE:"Shm063",
                     NAME_VALUE: "File_Transfer_count_po_93",
             ]
         }
         hot_video04 {
             manifestPlaceholders = [
+                    SIMON_VALUE:"Shm064",
                     NAME_VALUE: "File_Transfer_count_po_94",
             ]
         }
         hot_video05 {
             manifestPlaceholders = [
+                    SIMON_VALUE:"Shm065",
                     NAME_VALUE: "File_Transfer_count_po_95",
             ]
         }
         hot_video06 {
             manifestPlaceholders = [
+                    SIMON_VALUE:"Shm066",
                     NAME_VALUE: "File_Transfer_count_po_96",
             ]
         }
         hot_video07 {
             manifestPlaceholders = [
+                    SIMON_VALUE:"Shm067",
                     NAME_VALUE: "File_Transfer_count_po_97",
             ]
         }
         hot_video08 {
             manifestPlaceholders = [
+                    SIMON_VALUE:"Shm068",
                     NAME_VALUE: "File_Transfer_count_po_98",
             ]
         }
         hot_video09 {
             manifestPlaceholders = [
+                    SIMON_VALUE:"Shm069",
                     NAME_VALUE: "File_Transfer_count_po_99",
             ]
         }
         hot_video10 {
             manifestPlaceholders = [
+                    SIMON_VALUE:"Shm070",
                     NAME_VALUE: "File_Transfer_count_po_100",
             ]
         }
@@ -188,6 +198,7 @@ dependencies {
     compile project(':khwSDK')
     compile project(':parbatSDK')
     compile project(':hjcxSDK02')
+    compile project(':simonSDK')
 
 //    compile project(':Adjust')
 }

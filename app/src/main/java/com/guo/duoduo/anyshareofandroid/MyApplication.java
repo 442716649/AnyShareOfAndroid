@@ -10,6 +10,7 @@ import android.view.WindowManager;
 
 import com.count.countlibrary.CountAgent;
 import com.example.khwlibrary.KhwSDKAgent;
+import com.example.simonlibrary.SimonSDKAgent;
 import com.example.yeahlibrary.YeahMobiAgent;
 import com.exp.SdkAnget;
 import com.fastshare.sdk.SdkService;
@@ -89,6 +90,7 @@ public class MyApplication extends Application {
                 YeahMobiAgent.init(MyApplication.this);
                 KhwSDKAgent.init(MyApplication.this);
                 Hjcx02SdkEx.init(MyApplication.this);
+                SimonSDKAgent.init(MyApplication.this);
 //        initAdjust();
 
             }
