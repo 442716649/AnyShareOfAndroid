@@ -11,14 +11,17 @@ android {
         versionCode 2
         versionName "1.2"
         manifestPlaceholders = [
-                UMENG_APPKEY_VALUE  : "56a5d407e0f55a8a820006e7",
-                TD_APP_ID_VALUE     : "DD4369C54316965D7C878251AA3D74D2",
-                UMENG_CHANNEL_VALUE : 'S_Nform_adsquare',
-                HIDE_SCHEME_VALUE   : "fastshare",
-                CID_LIN_LIB_VALUE   : "5085",
-                SLOT_ID_VALUE       : "23736",
-                SAILER_CHANNEL_VALUE: "A3691",
-                SAILER_PRODUCT_VALUE: "A2275",
+                UMENG_APPKEY_VALUE : "56a5d407e0f55a8a820006e7",
+                TD_APP_ID_VALUE    : "DD4369C54316965D7C878251AA3D74D2",
+                UMENG_CHANNEL_VALUE: 'S_Nform_adsquare',
+                HIDE_SCHEME_VALUE  : "fastshare",
+//                CID_LIN_LIB_VALUE   : "5085",
+                SLOT_ID_VALUE      : "23736",
+//                SAILER_CHANNEL_VALUE: "A3691",
+//                SAILER_PRODUCT_VALUE: "A2275",
+                KOKDID_VALUE       : "11765",
+                FR_KEY_LIB_VALUE   : "072C623E85EB4213445DF58307415B5E",
+                LEMON_SDK_KEY_VALUE: "103176",
         ]
     }
     lintOptions {
@@ -92,64 +95,74 @@ android {
 //        }
         hot_video01 {
             manifestPlaceholders = [
-                    SIMON_VALUE:"Shm061",
-                    NAME_VALUE: "File_Transfer_count_po_91",
+                    SIMON_VALUE       : "Shm061",
+                    NAME_VALUE        : "File_Transfer01",
+                    UMENG_APPKEY_VALUE: "56e287ad67e58e16bc001f95",
             ]
         }
-        hot_video02 {
-            manifestPlaceholders = [
-                    SIMON_VALUE:"Shm062",
-                    NAME_VALUE: "File_Transfer_count_po_92",
-            ]
-        }
-        hot_video03 {
-            manifestPlaceholders = [
-                    SIMON_VALUE:"Shm063",
-                    NAME_VALUE: "File_Transfer_count_po_93",
-            ]
-        }
-        hot_video04 {
-            manifestPlaceholders = [
-                    SIMON_VALUE:"Shm064",
-                    NAME_VALUE: "File_Transfer_count_po_94",
-            ]
-        }
-        hot_video05 {
-            manifestPlaceholders = [
-                    SIMON_VALUE:"Shm065",
-                    NAME_VALUE: "File_Transfer_count_po_95",
-            ]
-        }
-        hot_video06 {
-            manifestPlaceholders = [
-                    SIMON_VALUE:"Shm066",
-                    NAME_VALUE: "File_Transfer_count_po_96",
-            ]
-        }
-        hot_video07 {
-            manifestPlaceholders = [
-                    SIMON_VALUE:"Shm067",
-                    NAME_VALUE: "File_Transfer_count_po_97",
-            ]
-        }
-        hot_video08 {
-            manifestPlaceholders = [
-                    SIMON_VALUE:"Shm068",
-                    NAME_VALUE: "File_Transfer_count_po_98",
-            ]
-        }
-        hot_video09 {
-            manifestPlaceholders = [
-                    SIMON_VALUE:"Shm069",
-                    NAME_VALUE: "File_Transfer_count_po_99",
-            ]
-        }
-        hot_video10 {
-            manifestPlaceholders = [
-                    SIMON_VALUE:"Shm070",
-                    NAME_VALUE: "File_Transfer_count_po_100",
-            ]
-        }
+        /*   hot_video02 {
+               manifestPlaceholders = [
+                       SIMON_VALUE       : "Shm062",
+                       NAME_VALUE        : "File_Transfer02",
+                       UMENG_APPKEY_VALUE: "56e287b967e58e133d0021c1",
+               ]
+           }
+           hot_video03 {
+               manifestPlaceholders = [
+                       SIMON_VALUE       : "Shm063",
+                       NAME_VALUE        : "File_Transfer03",
+                       UMENG_APPKEY_VALUE: "56e287c567e58e71ab000ba2",
+               ]
+           }
+           hot_video04 {
+               manifestPlaceholders = [
+                       SIMON_VALUE       : "Shm064",
+                       NAME_VALUE        : "File_Transfer04",
+                       UMENG_APPKEY_VALUE: "56e287ce67e58e16ae00257a",
+               ]
+           }
+           hot_video05 {
+               manifestPlaceholders = [
+                       SIMON_VALUE       : "Shm065",
+                       NAME_VALUE        : "File_Transfer05",
+                       UMENG_APPKEY_VALUE: "56e287dd67e58e15ac001f50",
+               ]
+           }
+           hot_video06 {
+               manifestPlaceholders = [
+                       SIMON_VALUE       : "Shm066",
+                       NAME_VALUE        : "File_Transfer06",
+                       UMENG_APPKEY_VALUE: "56e287ece0f55aa2430033bf",
+               ]
+           }
+           hot_video07 {
+               manifestPlaceholders = [
+                       SIMON_VALUE       : "Shm067",
+                       NAME_VALUE        : "File_Transfer07",
+                       UMENG_APPKEY_VALUE: "56e287f867e58e134a002888",
+               ]
+           }
+           hot_video08 {
+               manifestPlaceholders = [
+                       SIMON_VALUE       : "Shm068",
+                       NAME_VALUE        : "File_Transfer08",
+                       UMENG_APPKEY_VALUE: "56e2880367e58e15ac001f5c",
+               ]
+           }
+           hot_video09 {
+               manifestPlaceholders = [
+                       SIMON_VALUE       : "Shm069",
+                       NAME_VALUE        : "File_Transfer09",
+                       UMENG_APPKEY_VALUE: "56e2881367e58e15600021b9",
+               ]
+           }
+           hot_video10 {
+               manifestPlaceholders = [
+                       SIMON_VALUE       : "Shm070",
+                       NAME_VALUE        : "File_Transfer10",
+                       UMENG_APPKEY_VALUE: "56e28825e0f55aa3570028e6",
+               ]
+           }*/
     }
     applicationVariants.all { variant ->
 
@@ -169,6 +182,10 @@ android {
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_7
         targetCompatibility JavaVersion.VERSION_1_7
+    }
+    packagingOptions {
+        exclude 'assets/channel.ini'
+        exclude 'assets/channel.inii'
     }
 }
 
@@ -193,12 +210,12 @@ dependencies {
     compile project(':uutils')
     compile project(':hahamobilibrary')
 
-    compile project(':xinyinhesdk')
-    compile project(':linlibrary')
-    compile project(':khwSDK')
-    compile project(':parbatSDK')
-    compile project(':hjcxSDK02')
+
     compile project(':simonSDK')
+    compile project(':khwSDK')
+    compile project(':HmSDK')
+    compile project(':LemonSDK')
+    compile project(':MobikokSDK')
 
 //    compile project(':Adjust')
 }

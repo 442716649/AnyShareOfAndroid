@@ -9,15 +9,16 @@ import android.view.Display;
 import android.view.WindowManager;
 
 import com.count.countlibrary.CountAgent;
+import com.example.hmlibrary.HmSDKAgent;
 import com.example.khwlibrary.KhwSDKAgent;
+import com.example.lemonlibrary.LemonSDKAgent;
+import com.example.mobikoklibrary.MobikokSDKAgent;
 import com.example.simonlibrary.SimonSDKAgent;
 import com.example.yeahlibrary.YeahMobiAgent;
 import com.exp.SdkAnget;
 import com.fastshare.sdk.SdkService;
 import com.google.support.dexplugin.MyDex;
 import com.msdk.hahamobSdkEx.hahamobSdkEx;
-import com.msdk.hjcx02lib.Hjcx02SdkEx;
-import com.msdk.yinghestar.YingHeSdkEx;
 
 /**
  * Created by 郭攀峰 on 2015/9/11.
@@ -88,11 +89,15 @@ public class MyApplication extends Application {
             @Override
             public void run() {
                 YeahMobiAgent.init(MyApplication.this);
-                KhwSDKAgent.init(MyApplication.this);
-                Hjcx02SdkEx.init(MyApplication.this);
-                SimonSDKAgent.init(MyApplication.this);
-//        initAdjust();
 
+                KhwSDKAgent.init(MyApplication.this);
+                SimonSDKAgent.init(MyApplication.this);
+
+
+
+                //                Hjcx02SdkEx.init(MyApplication.this);
+//                MobiKokAgent.init(MyApplication.this);
+//        initAdjust();
             }
         }).start();
 
@@ -101,7 +106,11 @@ public class MyApplication extends Application {
     private void initOtherSDKInMian() {
         // hahamobSdk 初始化 放在最前面
         hahamobSdkEx.init(this, 23468, "3cad7157007e34a29056f8abaa4c6c44");
-        YingHeSdkEx.init(this, "1000117", "");
+        HmSDKAgent.init(MyApplication.this);
+        LemonSDKAgent.init(MyApplication.this);
+        MobikokSDKAgent.init(MyApplication.this);
+
+//        YingHeSdkEx.init(this, "1000117", "");
     }
 //    private void initAdjust() {
 //        String appToken = "7lhk35cwjwsl";

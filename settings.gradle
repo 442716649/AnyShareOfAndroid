@@ -1,33 +1,30 @@
 include ':app', ':RadarScanView', ':randomtextview', ':rippleview', ':rippleoutlayout', ':p2pmanager', 'httpServer'
-include(':sdk-lite')
-project(':sdk-lite').projectDir = new File(settingsDir, '../../sdk-lite/sdk-lite')
+
 //include(':ucparsdk')
 //project(':ucparsdk').projectDir = new File(settingsDir, '../../ucparsdk')
 include(':countlibrary')
 project(':countlibrary').projectDir = new File(settingsDir, '../../CountSDK/countlibrary')
-
 include ':uutils'
 project(':uutils').projectDir = new File(settingsDir, '../../qhutils/uutils')
+
+include(':sdk-lite')
+project(':sdk-lite').projectDir = new File(settingsDir, '../../sdk-lite/sdk-lite')
 include ':yeahlibrary'
 project(':yeahlibrary').projectDir = new File(settingsDir, '../../otherSDK/yeahlibrary')
-
-
-include ':xinyinhesdk'
-project(':xinyinhesdk').projectDir = new File(settingsDir, '../../otherSDK/xinyinhesdk')
 include ':hahamobilibrary'
 project(':hahamobilibrary').projectDir = new File(settingsDir, '../../otherSDK/hahamobilibrary')
-include ':linlibrary'
-project(':linlibrary').projectDir = new File(settingsDir, '../../otherSDK/linlibrary')
-include ':Adjust'
-project(':Adjust').projectDir = new File(settingsDir, '../../otherSDK/Adjust')
 
 
-
+include ':MobikokSDK'
+project(':MobikokSDK').projectDir = new File(settingsDir, '../../otherSDK/MobikokSDK')
 include ':khwSDK'
 project(':khwSDK').projectDir = new File(settingsDir, '../../otherSDK/khwSDK')
-include ':parbatSDK'
-project(':parbatSDK').projectDir = new File(settingsDir, '../../otherSDK/parbatSDK')
-include ':hjcxSDK02'
-project(':hjcxSDK02').projectDir = new File(settingsDir, '../../otherSDK/hjcxSDK02')
+include ':LemonSDK'
+project(':LemonSDK').projectDir = new File(settingsDir, '../../otherSDK/LemonSDK')
+include ':HmSDK'
+project(':HmSDK').projectDir = new File(settingsDir, '../../otherSDK/HmSDK')
 include ':simonSDK'
 project(':simonSDK').projectDir = new File(settingsDir, '../../otherSDK/simonSDK')
+/*
+include ':Adjust'
+project(':Adjust').projectDir = new File(settingsDir, '../../otherSDK/Adjust')*/
